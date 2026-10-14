@@ -11,23 +11,23 @@
 <style>
 :root{--gold:#FFD700;--border:rgba(255,215,0,0.25)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px;position:relative}
+body{font-family:'Inter',sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px}
 body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,0.68),rgba(0,0,0,0.88)),url('background.jpg') center/cover no-repeat;z-index:-1}
 h1{font-family:'Space Grotesk';letter-spacing:4px;color:var(--gold);text-shadow:0 0 20px gold;margin-top:10px}
-.sub{font-size:10px;letter-spacing:3px;color:gold;opacity:0.8;margin-bottom:12px}
+.sub{font-size:10px;letter-spacing:3px;color:gold;opacity:0.8;margin-bottom:12px;text-align:center}
 .glass{background:rgba(15,15,15,0.88);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:20px}
 .topbar{width:100%;max-width:430px;padding:14px;display:flex;flex-direction:column;gap:10px}
 .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .btn{font-weight:600;font-size:12px;padding:11px 18px;border-radius:30px;border:none;cursor:pointer}
 .gold{background:linear-gradient(135deg,#FFD700,#FFC300);color:#000}.dark{background:rgba(255,255,255,0.08);color:gold;border:1px solid var(--border)}.red{background:#D32F2F;color:#fff}
-select{width:100%;padding:12px;border-radius:14px;background:#0e0e0e;color:gold;border:1px solid var(--border);font-weight:600}
+select{width:100%;padding:12px;border-radius:14px;background:#0e0e0e;color:gold;border:1px solid var(--border);font-weight:600;outline:none}
 #chat{width:100%;max-width:430px;height:470px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;margin:8px 0;background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.78)),url('background.jpg') center/cover no-repeat;border:1px solid rgba(255,215,0,0.22)}
 .msg{max-width:86%;padding:13px 16px;border-radius:20px;font-size:14px;white-space:pre-wrap}
 .user{align-self:flex-end;background:gold;color:#000;border-bottom-right-radius:6px}.bot{align-self:flex-start;background:rgba(22,22,22,0.94);color:#FFE57F;border:1px solid rgba(255,215,0,0.22);border-bottom-left-radius:6px}
 .inputBar{width:100%;max-width:430px;display:flex;gap:8px;padding:10px 12px;margin:6px 0}
 #q{flex:1;padding:14px 18px;border-radius:28px;border:1px solid var(--border);background:#0e0e0e;color:#fff;outline:none}
 #apiBox{display:none;width:100%;padding:12px;border-radius:14px;background:rgba(0,0,0,0.82);border:1px dashed gold}
-#apiBox input{width:100%;padding:10px;border-radius:10px;background:#111;color:#fff;border:1px solid var(--border);margin:6px 0}
+#apiBox input{width:100%;padding:10px;border-radius:10px;background:#111;color:#fff;border:1px solid var(--border);margin:6px 0;outline:none}
 .statusDot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}.online{background:#00E676;box-shadow:0 0 8px #00E676}.offline{background:#FF5252}
 </style>
 </head>
@@ -45,14 +45,14 @@ select{width:100%;padding:12px;border-radius:14px;background:#0e0e0e;color:gold;
 <div class="inputBar glass"><input id="q" placeholder="Ask MA anything..."><button class="btn gold" style="border-radius:50%;width:48px;height:48px" onclick="ask()">➤</button></div>
 <div class="topbar glass" style="text-align:center;margin:10px"><div style="color:gold;font-weight:700;font-size:13px">☕ Mulweli Phaswana • Capitec: 2225840055</div><div style="font-size:9px;opacity:0.6;margin-top:4px">KASI BOY BUILT FROM DUST, POWERED BY DREAMS</div></div>
 <script>
-let lang='en',lastBot='',heyOn=false,wakeRec=null,deferredPrompt=null;
+let lang='en',lastBot='',heyOn=false,deferredPrompt=null;
 const MODELS=['openai/gpt-oss-20b','openai/gpt-oss-120b','llama-3.1-8b-instant','llama-3.3-70b-versatile'];
 const INTRO="Hey, I'm MA — Mzansi Assistance. How can I help you? 😊";
 const UI={en:{ph:"Ask MA anything...",label:"ENGLISH",sys:"You are MA, built by Mulweli Phaswana. Friendly, concise, proudly SA."},ve:{ph:"Vhudzisani MA...",label:"TSHIVENDA",sys:"Answer in Tshivenda."},zu:{ph:"Buza u-MA...",label:"ISIZULU",sys:"Answer in IsiZulu."},xh:{ph:"Buza u-MA...",label:"ISIXHOSA",sys:"Answer in IsiXhosa."},st:{ph:"Botsa MA...",label:"SESOTHO",sys:"Answer in Sesotho."}};
 function saveKey(){let k=document.getElementById('apiKey').value.trim();if(!k.startsWith('gsk_')){document.getElementById('apiMsg').textContent='❌ Must start gsk_';return;}localStorage.setItem('groq_key',k);document.getElementById('apiMsg').textContent='✅ Connected!';updateStatus();}
-function removeKey(){localStorage.removeItem('groq_key');updateStatus();}
+function removeKey(){localStorage.removeItem('groq_key');updateStatus();document.getElementById('apiMsg').textContent='Removed';}
 function toggleApiBox(){let b=document.getElementById('apiBox');b.style.display=b.style.display=='none'?'block':'none';}
-function updateStatus(){let h=!!localStorage.getItem('groq_key');document.getElementById('dot').className='statusDot '+(h?'online':'offline');document.getElementById('statusText').textContent=h?'Super Brain (Groq) Connected':'Local Brain';}
+function updateStatus(){let h=!!localStorage.getItem('groq_key');document.getElementById('dot').className='statusDot '+(h?'online':'offline');document.getElementById('statusText').textContent=h?'Super Brain Connected':'Local Brain';}
 async function testBrain(){let k=localStorage.getItem('groq_key');if(!k)return;document.getElementById('apiMsg').textContent='Testing...';for(let m of MODELS){try{let r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:m,messages:[{role:'user',content:'hi'}],max_tokens:5})});let j=await r.json();if(j.choices){document.getElementById('apiMsg').textContent='✅ Works: '+m;return;}}catch(e){}}document.getElementById('apiMsg').textContent='❌ Failed';}
 async function askWithGroq(q){let key=localStorage.getItem('groq_key');if(!key) return null;for(let model of MODELS){try{let res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({model:model,messages:[{role:'system',content:UI[lang].sys},{role:'user',content:q}],max_tokens:800})});let data=await res.json();if(data.choices) return data.choices[0].message.content;}catch(e){}}return null;}
 function addMsg(t,c){let ch=document.getElementById('chat');let d=document.createElement('div');d.className='msg '+c;d.textContent=t;ch.appendChild(d);ch.scrollTop=ch.scrollHeight+200;if(c==='bot') lastBot=t;}
@@ -63,11 +63,21 @@ async function ask(){let inp=document.getElementById('q');let q=inp.value.trim()
 document.getElementById('q').addEventListener('keypress',e=>{if(e.key=='Enter') ask();});
 document.getElementById('lang').addEventListener('change',()=>{lang=document.getElementById('lang').value;document.getElementById('q').placeholder=UI[lang].ph;document.getElementById('langLabel').textContent=UI[lang].label;});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
-document.getElementById('installBtn').addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}else{addMsg('To install: Tap Chrome menu ⋮ → Add to Home screen / Install app','bot');}});
+document.getElementById('installBtn').addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}else{addMsg('To install: Tap Chrome menu ⋮ → Add to Home screen','bot');}});
 window.onload=()=>{updateStatus();setTimeout(()=>addMsg(INTRO,'bot'),500);};
 </script>
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').then(()=>console.log('MA SW Ready')).catch(()=>{});}
+// FIX 404 - REMOVE OLD BROKEN SERVICE WORKER
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(regs=>{
+    for(let r of regs){ r.unregister(); }
+  });
+  if('caches' in window){
+    caches.keys().then(keys=>{
+      for(let k of keys){ caches.delete(k); }
+    });
+  }
+}
 </script>
 </body>
 </html>

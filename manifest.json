@@ -1,8 +1,7 @@
 {
-  "name": "MA • Mzansi Assistance 2026",
+  "name": "MA • Mzansi Assistance",
   "short_name": "MA",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "https://phaswana21-sa.github.io/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#FFD700",

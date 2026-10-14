@@ -2,81 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MA • Mzansi Assistance 2026</title>
-<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA - Mzansi Assistance</title>
+<link rel="manifest" href="manifest.json?v=3">
 <meta name="theme-color" content="#FFD700">
-<link rel="apple-touch-icon" href="background.jpg">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#FFD700;--border:rgba(255,215,0,0.25)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px}
-body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,0.68),rgba(0,0,0,0.88)),url('background.jpg') center/cover no-repeat;z-index:-1}
-h1{font-family:'Space Grotesk';letter-spacing:4px;color:var(--gold);text-shadow:0 0 20px gold;margin-top:10px}
-.sub{font-size:10px;letter-spacing:3px;color:gold;opacity:0.8;margin-bottom:12px;text-align:center}
-.glass{background:rgba(15,15,15,0.88);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:20px}
-.topbar{width:100%;max-width:430px;padding:14px;display:flex;flex-direction:column;gap:10px}
-.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.btn{font-weight:600;font-size:12px;padding:11px 18px;border-radius:30px;border:none;cursor:pointer}
-.gold{background:linear-gradient(135deg,#FFD700,#FFC300);color:#000}.dark{background:rgba(255,255,255,0.08);color:gold;border:1px solid var(--border)}.red{background:#D32F2F;color:#fff}
-select{width:100%;padding:12px;border-radius:14px;background:#0e0e0e;color:gold;border:1px solid var(--border);font-weight:600;outline:none}
-#chat{width:100%;max-width:430px;height:470px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;margin:8px 0;background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.78)),url('background.jpg') center/cover no-repeat;border:1px solid rgba(255,215,0,0.22)}
-.msg{max-width:86%;padding:13px 16px;border-radius:20px;font-size:14px;white-space:pre-wrap}
-.user{align-self:flex-end;background:gold;color:#000;border-bottom-right-radius:6px}.bot{align-self:flex-start;background:rgba(22,22,22,0.94);color:#FFE57F;border:1px solid rgba(255,215,0,0.22);border-bottom-left-radius:6px}
-.inputBar{width:100%;max-width:430px;display:flex;gap:8px;padding:10px 12px;margin:6px 0}
-#q{flex:1;padding:14px 18px;border-radius:28px;border:1px solid var(--border);background:#0e0e0e;color:#fff;outline:none}
-#apiBox{display:none;width:100%;padding:12px;border-radius:14px;background:rgba(0,0,0,0.82);border:1px dashed gold}
-#apiBox input{width:100%;padding:10px;border-radius:10px;background:#111;color:#fff;border:1px solid var(--border);margin:6px 0;outline:none}
-.statusDot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}.online{background:#00E676;box-shadow:0 0 8px #00E676}.offline{background:#FF5252}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000 url('background.jpg') no-repeat center center fixed;background-size:cover;color:#FFD700;font-family:Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.header{padding:10px;text-align:center;background:rgba(0,0,0,0.85);border-bottom:2px solid #FFD700}
+.title{font-size:1.8em;font-weight:bold;color:#FFD700;text-shadow:2px 2px 4px #000}
+.top-btns{display:flex;gap:10px;justify-content:center;margin:10px 0}
+.btn{background:rgba(0,0,0,0.8);border:2px solid #FFD700;color:#FFD700;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:bold}
+.chat-container{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:85%;padding:12px 16px;border-radius:18px;line-height:1.4;white-space:pre-wrap}
+.bot{background:rgba(0,0,0,0.9);border:1px solid #333;align-self:flex-start;color:#FFE55C}
+.user{background:#FFD700;color:#000;align-self:flex-end;font-weight:500}
+.input-area{display:flex;gap:10px;padding:15px;background:rgba(0,0,0,0.95);border-top:2px solid #FFD700}
+input{flex:1;padding:14px;border-radius:25px;border:2px solid #FFD700;background:#111;color:#FFD700;outline:none}
+.send-btn{width:55px;height:55px;border-radius:50%;background:#FFD700;border:none;font-size:22px;cursor:pointer;font-weight:bold}
+.footer{text-align:center;padding:10px;background:rgba(0,0,0,0.95);border-top:1px solid #333;font-size:0.9em}
+.gold{color:#FFD700;font-weight:bold}
 </style>
 </head>
 <body>
-<h1>MA • MZANSI</h1>
-<div class="sub">BUILT FROM DUST • POWERED BY DREAMS • 2026</div>
-<div class="topbar glass">
-<div style="display:flex;justify-content:space-between;font-size:11px"><span><span id="dot" class="statusDot offline"></span><span id="statusText">Local Brain</span></span><span id="langLabel">ENGLISH</span></div>
-<select id="lang"><option value="en">🌍 English</option><option value="ve">🇿🇦 Tshivenda</option><option value="zu">🇿🇦 IsiZulu</option><option value="xh">🇿🇦 IsiXhosa</option><option value="st">🇿🇦 Sesotho</option></select>
-<div class="row"><button class="btn gold" id="installBtn">⬇️ INSTALL APP</button><button class="btn dark" onclick="shareApp()">📤 SHARE</button><button class="btn red" id="wakeBtn" onclick="toggleWake()">🎤 HEY MA</button></div>
-<div class="row"><button class="btn dark" onclick="toggleApiBox()">🧠 CONNECT AI BRAIN</button><button class="btn dark" onclick="clearChat()">🧹 CLEAR</button></div>
-<div id="apiBox"><input id="apiKey" type="password" placeholder="gsk_..."><div class="row"><button class="btn gold" onclick="saveKey()">💾 SAVE</button><button class="btn dark" onclick="testBrain()">🧪 TEST</button><button class="btn dark" onclick="removeKey()">❌ REMOVE</button></div><div id="apiMsg" style="font-size:11px;color:#00E676;margin-top:6px"></div></div>
+<div class="header">
+<div class="title">MA • MZANSI 2026</div>
+<div style="font-size:0.8em;margin-top:5px">🔴 Local Brain • Built From Dust</div>
+<div class="top-btns">
+<button class="btn" onclick="connectAI()">🧠 CONNECT AI BRAIN</button>
+<button class="btn" onclick="clearChat()">🧹 CLEAR</button>
 </div>
-<div id="chat" class="glass"></div>
-<div class="inputBar glass"><input id="q" placeholder="Ask MA anything..."><button class="btn gold" style="border-radius:50%;width:48px;height:48px" onclick="ask()">➤</button></div>
-<div class="topbar glass" style="text-align:center;margin:10px"><div style="color:gold;font-weight:700;font-size:13px">☕ Mulweli Phaswana • Capitec: 2225840055</div><div style="font-size:9px;opacity:0.6;margin-top:4px">KASI BOY BUILT FROM DUST, POWERED BY DREAMS</div></div>
+</div>
+<div class="chat-container" id="chat">
+<div class="msg bot">Hey, I'm MA — Mzansi Assistance. How can I help you? 😊
+
+Ask me anything: water, physics, maths, science, life - I got you kasi style!</div>
+</div>
+<div class="input-area">
+<input id="userInput" placeholder="Ask MA anything..." onkeypress="if(event.key==='Enter') sendMsg()">
+<button class="send-btn" onclick="sendMsg()">➤</button>
+</div>
+<div class="footer">
+<div>☕ <span class="gold">Mulweli Phaswana • Capitec: 2225840055</span></div>
+<div style="margin-top:5px;font-size:0.8em;color:#aaa">KASI BOY BUILT FROM DUST, POWERED BY DREAMS</div>
+</div>
 <script>
-let lang='en',lastBot='',heyOn=false,deferredPrompt=null;
-const MODELS=['openai/gpt-oss-20b','openai/gpt-oss-120b','llama-3.1-8b-instant','llama-3.3-70b-versatile'];
-const INTRO="Hey, I'm MA — Mzansi Assistance. How can I help you? 😊";
-const UI={en:{ph:"Ask MA anything...",label:"ENGLISH",sys:"You are MA, built by Mulweli Phaswana. Friendly, concise, proudly SA."},ve:{ph:"Vhudzisani MA...",label:"TSHIVENDA",sys:"Answer in Tshivenda."},zu:{ph:"Buza u-MA...",label:"ISIZULU",sys:"Answer in IsiZulu."},xh:{ph:"Buza u-MA...",label:"ISIXHOSA",sys:"Answer in IsiXhosa."},st:{ph:"Botsa MA...",label:"SESOTHO",sys:"Answer in Sesotho."}};
-function saveKey(){let k=document.getElementById('apiKey').value.trim();if(!k.startsWith('gsk_')){document.getElementById('apiMsg').textContent='❌ Must start gsk_';return;}localStorage.setItem('groq_key',k);document.getElementById('apiMsg').textContent='✅ Connected!';updateStatus();}
-function removeKey(){localStorage.removeItem('groq_key');updateStatus();document.getElementById('apiMsg').textContent='Removed';}
-function toggleApiBox(){let b=document.getElementById('apiBox');b.style.display=b.style.display=='none'?'block':'none';}
-function updateStatus(){let h=!!localStorage.getItem('groq_key');document.getElementById('dot').className='statusDot '+(h?'online':'offline');document.getElementById('statusText').textContent=h?'Super Brain Connected':'Local Brain';}
-async function testBrain(){let k=localStorage.getItem('groq_key');if(!k)return;document.getElementById('apiMsg').textContent='Testing...';for(let m of MODELS){try{let r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:m,messages:[{role:'user',content:'hi'}],max_tokens:5})});let j=await r.json();if(j.choices){document.getElementById('apiMsg').textContent='✅ Works: '+m;return;}}catch(e){}}document.getElementById('apiMsg').textContent='❌ Failed';}
-async function askWithGroq(q){let key=localStorage.getItem('groq_key');if(!key) return null;for(let model of MODELS){try{let res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({model:model,messages:[{role:'system',content:UI[lang].sys},{role:'user',content:q}],max_tokens:800})});let data=await res.json();if(data.choices) return data.choices[0].message.content;}catch(e){}}return null;}
-function addMsg(t,c){let ch=document.getElementById('chat');let d=document.createElement('div');d.className='msg '+c;d.textContent=t;ch.appendChild(d);ch.scrollTop=ch.scrollHeight+200;if(c==='bot') lastBot=t;}
-function clearChat(){document.getElementById('chat').innerHTML='';addMsg(INTRO,'bot');}
-function shareApp(){if(navigator.share){navigator.share({title:'MA',url:location.href});}else{addMsg(location.href,'bot');}}
-function toggleWake(){heyOn=!heyOn;document.getElementById('wakeBtn').textContent=heyOn?'🛑 STOP':'🎤 HEY MA';}
-async function ask(){let inp=document.getElementById('q');let q=inp.value.trim();if(!q) return;addMsg(q,'user');inp.value='';let th=document.createElement('div');th.className='msg bot';th.textContent='MA thinking...';th.id='thinking';document.getElementById('chat').appendChild(th);let ans=localStorage.getItem('groq_key')?await askWithGroq(q):null;if(!ans) ans="Sharp! I'm MA - ready to help!";document.getElementById('thinking')?.remove();addMsg(ans,'bot');}
-document.getElementById('q').addEventListener('keypress',e=>{if(e.key=='Enter') ask();});
-document.getElementById('lang').addEventListener('change',()=>{lang=document.getElementById('lang').value;document.getElementById('q').placeholder=UI[lang].ph;document.getElementById('langLabel').textContent=UI[lang].label;});
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
-document.getElementById('installBtn').addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}else{addMsg('To install: Tap Chrome menu ⋮ → Add to Home screen','bot');}});
-window.onload=()=>{updateStatus();setTimeout(()=>addMsg(INTRO,'bot'),500);};
-</script>
-<script>
-// FIX 404 - REMOVE OLD BROKEN SERVICE WORKER
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.getRegistrations().then(regs=>{
-    for(let r of regs){ r.unregister(); }
-  });
-  if('caches' in window){
-    caches.keys().then(keys=>{
-      for(let k of keys){ caches.delete(k); }
-    });
+  navigator.serviceWorker.getRegistrations().then(regs=>{regs.forEach(r=>r.unregister());});
+  caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+}
+const knowledge = {
+  water: "💧 Water is H2O - two hydrogen + one oxygen. It's life bruh! Covers 71% of Earth, makes up 60% of your body. Without water, no Mzansi, no life. It exists as liquid, ice, and vapour. Stay hydrated king!",
+  physics: "⚛️ Physics is how the universe moves bruh! From how your soccer ball curves to why stars shine. Main branches: Mechanics (motion), Energy, Light, Sound, Electricity. Newton, Einstein - they tried to explain the dust we built from!",
+  chemistry: "🧪 Chemistry is mixing stuff to make new stuff! Atoms, molecules, reactions. Like cooking pap - you mix maize + water + heat = food. Everything is chemicals, even you!",
+  maths: "🔢 Maths is the language of the universe! Numbers, patterns, problem-solving. Add, subtract, multiply, divide - if you master maths, you master money and logic. Kasi boy must know his numbers!",
+  science: "🔬 Science is asking 'WHY?' and finding answers. Observe, question, test, learn. Mzansi needs more scientists - maybe you next!",
+  biology: "🧬 Biology is study of life - plants, animals, humans. How your body works, why plants grow, how we breathe. You are biology in action!",
+  ai: "🤖 AI = Artificial Intelligence. Machines that learn like humans. Like me MA! I learn from data to help you. Future is AI + Mzansi brains together.",
+  love: "❤️ Love is connection bruh - caring beyond yourself. Respect, loyalty, showing up. Real love builds, it doesn't break.",
+  money: "💰 Money is tool, not goal. Save 20%, invest 30%, grow 50%. Capitec 2225840055 - support kasi dream! But learn to make money work for you.",
+  dream: "✨ Dreams are maps from dust to destiny. You said 'Built From Dust, Powered By Dreams' - that's real! Every big thing started as small idea in kasi.",
+  mzansi: "🇿🇦 Mzansi is home! 11 languages, one heart. From Kasi to Sandton, we hustle, we love, we build. Proudly South African!"
+};
+function getAnswer(q){
+  let lower = q.toLowerCase();
+  for(let key in knowledge){
+    if(lower.includes(key)) return knowledge[key];
   }
+  if(lower.includes("who are you") || lower.includes("what are you")) return "Sharp! I'm MA — Mzansi Assistance, created by Mulweli Phaswana. Kasi boy built from dust, powered by dreams! I'm here to help you learn, grow, and build. Ask me science, life, anything!";
+  if(lower.includes("hello") || lower.includes("hey") || lower.includes("sharp") || lower.includes("heita")) return "Heita! Sharp! I'm here bruh 😊 What you wanna know today? Ask me about water, physics, maths - I got answers!";
+  if(lower.includes("how are you")) return "I'm sharp bruh! Running on local brain, ready to empower Mzansi minds. How can I help you today?";
+  if(lower.includes("thank")) return "Pleasure bruh! 🙏 That's what MA is for - AI CONNECT • EMPOWER • GROW. Ask more anytime!";
+  return `Sharp question! You asked: "${q}"
+
+Here's what I know: I'm MA, your Mzansi Assistant. I'm still growing my local brain, but I can tell you this - every question is a step from dust to greatness.
+
+Try asking about: water, physics, chemistry, maths, biology, AI, money, dreams, or Mzansi. Or tap CONNECT AI BRAIN for super smart online mode! 💛`;
+}
+function sendMsg(){
+  const input = document.getElementById('userInput');
+  const chat = document.getElementById('chat');
+  let text = input.value.trim();
+  if(!text) return;
+  let u = document.createElement('div');
+  u.className='msg user';
+  u.textContent=text;
+  chat.appendChild(u);
+  input.value='';
+  setTimeout(()=>{
+    let b = document.createElement('div');
+    b.className='msg bot';
+    b.textContent=getAnswer(text);
+    chat.appendChild(b);
+    chat.scrollTop = chat.scrollHeight;
+  },400);
+  chat.scrollTop = chat.scrollHeight;
+}
+function clearChat(){
+  document.getElementById('chat').innerHTML='<div class="msg bot">Chat cleared! Sharp - new start. How can I help? 😊</div>';
+}
+function connectAI(){
+  alert("🧠 CONNECT AI BRAIN:\n\nTo make MA super smart online:\n1. Get free API key from OpenAI or Gemini\n2. I can add code to connect it\n\nFor now, Local Brain is active and answering! Ask me anything.");
 }
 </script>
 </body>

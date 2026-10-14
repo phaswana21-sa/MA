@@ -1,111 +1,124 @@
 <!DOCTYPE html>
-<html lang="ve">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#000">
-<title>MA - Mzansi Assistance by Mulweli Phaswana</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#0a0a0a">
+<title>MA • Mzansi Assistance 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;color:#fff;font-family:Arial,sans-serif;background:linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.85)),url('background.jpg') no-repeat center center fixed;background-size:cover;min-height:100vh}
-#logo{width:95%;max-width:380px;border-radius:16px;border:3px solid gold;box-shadow:0 0 30px gold;margin:8px auto;display:block}
-.box{margin:10px 0;padding:12px;background:rgba(0,0,0,0.85);border-radius:14px;border:1px solid gold}
-.btn{padding:11px 16px;border-radius:25px;border:none;font-weight:bold;margin:4px;cursor:pointer;font-size:12px}
-.gold{background:gold;color:#000}.green{background:#00c853;color:#000}.dark{background:rgba(21,21,21,0.9);color:gold;border:1px solid gold}
-.red{background:#d32f2f;color:#fff}.blue{background:#1976d2;color:#fff}.purple{background:#7b1fa2;color:#fff}
-#chat{height:360px;overflow-y:auto;background:rgba(0,0,0,0.9);border-radius:16px;padding:10px;text-align:left;margin:10px 0;border:1px solid gold}
-.msg{margin:7px 0;padding:10px 13px;border-radius:18px;font-size:13px;max-width:86%}.user{background:gold;color:#000;margin-left:auto;text-align:right}.bot{background:rgba(20,20,20,0.95);color:#ffeb3b;border:1px solid gold;margin-right:auto;white-space:pre-wrap}
-#q{flex:1;padding:11px 15px;border-radius:25px;border:1px solid gold;background:rgba(21,21,21,0.9);color:#fff;outline:none}
-select{padding:8px;border-radius:20px;background:rgba(21,21,21,0.9);color:gold;border:1px solid gold;width:95%;margin:5px 0}
-.tagline{color:#d4af37;font-size:10px;font-weight:bold;letter-spacing:1px;margin:4px 0;text-shadow:0 0 5px gold}
-.speaking{border:2px solid #00c853!important}
-#wakeBtn.active{background:#00c853!important;animation:pulse 1s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 #00c853}70%{box-shadow:0 0 0 10px rgba(0,200,83,0)}100%{box-shadow:0 0 0 0 transparent}}
+:root{--gold:#FFD700;--gold2:#FFC300;--bg:#0a0a0a;--card:rgba(20,20,20,0.88);--border:rgba(255,215,0,0.25)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:radial-gradient(ellipse at top, rgba(255,215,0,0.18) 0%, transparent 50%),linear-gradient(rgba(0,0,0,0.82),rgba(0,0,0,0.92)),url('background.jpg') no-repeat center center fixed;background-size:cover;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:12px}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:4px;color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,0.6);margin-top:10px;font-size:26px}
+.sub{font-family:'Space Grotesk';font-size:10px;letter-spacing:3px;color:var(--gold);opacity:0.8;margin:6px 0 12px}
+.glass{background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,215,0,0.1)}
+.topbar{width:100%;max-width:430px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.btn{font-family:'Space Grotesk';font-weight:600;font-size:12px;padding:11px 18px;border-radius:30px;border:none;cursor:pointer;transition:0.2s;letter-spacing:0.5px}
+.btn:active{transform:scale(0.96)}
+.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;box-shadow:0 4px 15px rgba(255,215,0,0.35)}
+.green{background:#00E676;color:#000}.dark{background:rgba(255,255,255,0.08);color:var(--gold);border:1px solid var(--border);backdrop-filter:blur(10px)}
+.red{background:linear-gradient(135deg,#FF5252,#D32F2F);color:#fff}.blue{background:linear-gradient(135deg,#448AFF,#1976D2);color:#fff}
+select{width:100%;padding:12px 16px;border-radius:14px;background:rgba(0,0,0,0.6);color:var(--gold);border:1px solid var(--border);font-family:'Space Grotesk';font-weight:600;font-size:13px;outline:none}
+#chat{width:100%;max-width:430px;height:460px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;margin:8px 0}
+.msg{max-width:86%;padding:13px 16px;border-radius:20px;font-size:14px;line-height:1.5;animation:pop 0.25s ease;white-space:pre-wrap;word-wrap:break-word}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),#FFB300);color:#000;border-bottom-right-radius:6px;font-weight:500;box-shadow:0 4px 12px rgba(255,215,0,0.25)}
+.bot{align-self:flex-start;background:rgba(30,30,30,0.95);color:#FFE57F;border:1px solid rgba(255,215,0,0.2);border-bottom-left-radius:6px}
+.inputBar{width:100%;max-width:430px;display:flex;gap:8px;align-items:center;padding:10px 12px;margin:6px 0}
+#q{flex:1;padding:14px 18px;border-radius:28px;border:1px solid var(--border);background:rgba(15,15,15,0.9);color:#fff;outline:none;font-family:'Inter';font-size:14px}
+.iconBtn{width:48px;height:48px;border-radius:50%;border:none;display:grid;place-items:center;font-size:18px;cursor:pointer;flex-shrink:0}
+.badge{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;margin-top:4px}
+.support{width:100%;max-width:430px;padding:16px;text-align:center;margin:10px 0 20px}
+.support.title{font-family:'Space Grotesk';font-weight:700;color:var(--gold);letter-spacing:1px;font-size:13px}
+.support.cap{color:var(--gold);font-weight:700;font-size:16px;margin:6px 0}
+#apiBox{display:none;width:100%;margin-top:10px;padding:12px;border-radius:14px;background:rgba(0,0,0,0.7);border:1px dashed var(--gold)}
+#apiBox input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#111;color:#fff;margin:6px 0}
+.statusDot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.online{background:#00E676;box-shadow:0 0 8px #00E676}.offline{background:#FF5252}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
-<img id="logo" src="mzansi-bg.jpg" alt="Mzansi Assistant 2026">
-<h1 style="color:gold;font-family:serif;letter-spacing:3px;margin:5px 0;text-shadow:0 0 10px gold">MA - Mzansi Assistance</h1>
-<div class="tagline">BUILT FROM DUST, POWERED BY DREAMS</div>
-<div style="color:#d4af37;font-size:11px">VENDA FIRST • 6 LANGUAGES • HEY MA WAKE • NO GLITCH</div>
-
-<select id="lang" onchange="changeLang()">
-<option value="ve" selected>Tshivenda</option><option value="zu">IsiZulu</option>
-<option value="st">Sesotho</option><option value="xh">IsiXhosa</option>
-<option value="ts">Xitsonga</option><option value="en">English</option>
+<h1>MA • MZANSI</h1>
+<div class="sub">BUILT FROM DUST • POWERED BY DREAMS • 2026</div>
+<div class="topbar glass">
+<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.7)">
+<span><span id="dot" class="statusDot offline"></span><span id="statusText">Local Brain</span></span>
+<span id="langLabel">ENGLISH</span>
+</div>
+<select id="lang">
+<option value="en">🌍 English</option>
+<option value="ve">Tshivenda</option>
+<option value="zu">IsiZulu</option>
+<option value="st">Sesotho</option>
+<option value="xh">IsiXhosa</option>
+<option value="ts">Xitsonga</option>
 </select>
-
-<div class="box">
-<button class="btn green" id="installBtn">⬇️ INSTALL</button>
-<button class="btn gold" onclick="share()">📤 SHARE</button>
-<button class="btn blue" onclick="teachMode()">📚 FUNDA</button>
-<button class="btn purple" onclick="document.getElementById('doc').click()">📄 VHALA PDF</button>
-<button class="btn red" id="wakeBtn" onclick="toggleHeyMA()">🎤 HEY MA</button>
-<input type="file" id="doc" accept=".pdf,.txt" hidden>
+<div class="row">
+<button class="btn gold" id="installBtn">⬇️ INSTALL APP</button>
+<button class="btn dark" onclick="shareApp()">📤 SHARE</button>
+<button class="btn red" id="wakeBtn" onclick="toggleWake()">🎤 HEY MA</button>
 </div>
-
-<div id="chat"></div>
-
-<div style="display:flex;gap:5px;justify-content:center;margin:10px 0">
-<input id="q" placeholder="Bula nga Tshivenda... or say Hey MA">
-<button class="btn gold" style="border-radius:50%;width:44px;height:44px;padding:0" onclick="ask()">🌍</button>
-<input type="file" id="photo" accept="image/*" hidden>
-<button class="btn dark" style="border-radius:50%;width:44px;height:44px;padding:0" onclick="document.getElementById('photo').click()">📸</button>
-<button class="btn dark" style="border-radius:50%;width:44px;height:44px;padding:0" onclick="speakLast()">🔊</button>
+<div class="row">
+<button class="btn dark" onclick="toggleApiBox()">🧠 CONNECT AI BRAIN</button>
+<button class="btn dark" onclick="clearChat()">🧹 CLEAR</button>
 </div>
-
-<div class="box" style="border:1.8px dashed gold">
-<div style="color:gold;font-weight:bold">☕ SUPPORT MULWELI WA RALIPHASWA</div>
-<div style="color:gold;font-size:12px">Founder: Mulweli Phaswana wa ha Raliphaswa Nzhelele</div>
-<div style="color:gold;font-size:12px">Kasi Boy - Built From Dust, Powered By Dreams</div>
-<div style="color:gold;font-size:14px;font-weight:bold">Capitec: 2225840055</div>
-<div style="color:#d4af37;font-size:10px">AI CONNECT EMPOWER GROW • Mzansi Assistant 2026</div>
+<div id="apiBox">
+<div style="font-size:12px;color:var(--gold);font-weight:600">Add FREE Groq Key to make MA super smart</div>
+<div style="font-size:10px;color:#aaa;margin:4px 0">Get free at groq.com → API Keys → Create → Paste below</div>
+<input id="apiKey" type="password" placeholder="gsk_... paste Groq key here">
+<div class="row">
+<button class="btn gold" style="font-size:11px" onclick="saveKey()">💾 SAVE BRAIN</button>
+<button class="btn dark" style="font-size:11px" onclick="testBrain()">🧪 TEST</button>
+<button class="btn dark" style="font-size:11px" onclick="removeKey()">❌ REMOVE</button>
 </div>
-
+<div id="apiMsg" style="font-size:11px;margin-top:6px;color:#00E676"></div>
+</div>
+</div>
+<div id="chat" class="glass"></div>
+<div class="inputBar glass">
+<input id="q" placeholder="Ask MA anything...">
+<button class="btn gold iconBtn" onclick="ask()">➤</button>
+<button class="btn dark iconBtn" onclick="speakLast()">🔊</button>
+</div>
+<div class="badge">MA RESPONDS INSTANTLY • NO REPEATING • 6 LANGUAGES</div>
+<div class="support glass">
+<div class="title">☕ SUPPORT FOUNDER</div>
+<div style="font-size:12px;color:#ccc;margin:4px 0">Mulweli Phaswana • Nzhelele • Kasi Boy</div>
+<div class="cap">Capitec: 2225840055 • MA 2026</div>
+</div>
 <script>
-const dict={
-ve:{
-"ndaa":"Ndaa Vho! Ndi matsheloni a vhudi. Ni khou vuwa hani namusi?",
-"ndaa vho":"Ndaa Vho makhulu! Ndi a vha losha nga mbilu yothe.",
-"livhuwa":"Ndi a livhuwa nga maanda Vho! Zwi a takadza mbilu yanga.",
-"ndi khou pfa hani":"Ndi khou pfa zwavhudi nga maanda, ndi a livhuwa! Ndi khou shuma nga nungo.",
-"vhuswa":"Vhuswa na mukonde ndi zwiliwa zwa vhubvo. Ndi zwavhudi nga maanda!",
-"who are you":"Ndi nne MA - Mzansi Assistance. Ndi yo bveledzwa nga Mulweli Phaswana wa ha Raliphaswa Nzhelele. Ndi Kasi Boy o no bva mapfumbani a tshi ya dora. Ndo itelwa u thusa Vhavenda na Mzansi wothe nga Tshivenda tsha vhukuma.",
-"nnyi o itaho":"Ndi Mulweli Phaswana o mbveledzaho. Founder wa MA. Muthu o no bva mapfumbani.",
-"nnyi o itaho wena":"Ndi Mulweli Phaswana wa Raliphaswa o mbveledzaho. Ndi ene o mpaho vhutshilo.",
-"mulweli":"Mulweli Phaswana ndi munna wa maanda, o bva Nzhelele. Ndi ene o sika MA o itela vhathu vhawe. Built From Dust, Powered By Dreams.",
-"thuso":"Ndi do vha thusa nga dakalo. Vha khou toda thuso ya mini?",
-"madi":"Madi ndi vhutshilo.",
-"lufuno":"Lufuno ndi tshithu tsha ndeme.",
-"sharp":"Ee nda vhuya bru! Ri khou tshimbila zwavhudi. Ndaa!",
-"eish":"Eish zwidala. Ndi a zwi pfesesa.",
-"sala":"Sala zwavhudi. Vha songo hangwa u vhuya."
-},
-zu:{"sawubona":"Sawubona mfowethu! Unjani?","who are you":"Ngingu MA - ngakhiwa nguMulweli Phaswana, Kasi Boy"},
-st:{"dumela":"Dumela ntate! O phela jwang?","who are you":"Ke MA - ke entswe ke Mulweli Phaswana"},
-xh:{"molo":"Molo bhuti! Unjani?","who are you":"Ndingu MA - ndenziwe nguMulweli Phaswana"},
-ts:{"avuxeni":"Avuxeni! U njhani?","who are you":"Hi mina MA - ndri endliwe hi Mulweli Phaswana"},
-en:{"hello":"Hello! I am MA, built by Mulweli Phaswana, Kasi Boy Built From Dust. Fluent in Venda first.","who are you":"I am MA - Created by Mulweli Phaswana wa Raliphaswa Nzhelele. Founder: Mulweli. Built From Dust, Powered By Dreams."}
+let lang='en',lastBot='',heyOn=false,wakeRec=null,deferredPrompt=null;
+const UI={
+ en:{ph:"Ask MA anything...",intro:"Hey, I'm MA — Mzansi Assistance. How can I assist you today? 😊",sys:"You are MA, Mzansi Assistance, built by Mulweli Phaswana from Nzhelele. Friendly, concise, helpful. Speak English but you know Tshivenda, Zulu, Sotho, Xhosa, Tsonga. Never repeat user question. Answer directly. Founder: Mulweli Phaswana - Built From Dust, Powered By Dreams."},
+ ve:{ph:"Vhudzisani MA...",intro:"Hey, I'm MA — How can I assist you today? 😊 (Amba nga Tshivenda)",sys:"You are MA, built by Mulweli Phaswana. Answer in Tshivenda. Be friendly, concise. Never repeat user input."},
+ zu:{ph:"Buza u-MA...",intro:"Hey, I'm MA — How can I assist you today? 😊",sys:"You are MA, answer in IsiZulu."},
+ st:{ph:"Botsa MA...",intro:"Hey, I'm MA — How can I assist you today? 😊",sys:"You are MA, answer in Sesotho."},
+ xh:{ph:"Buza u-MA...",intro:"Hey, I'm MA — How can I assist you today? 😊",sys:"You are MA, answer in IsiXhosa."},
+ ts:{ph:"Vutisa MA...",intro:"Hey, I'm MA — How can I assist you today? 😊",sys:"You are MA, answer in Xitsonga."}
 };
-const langKeywords={ve:['ndaa','livhuwa','vhuswa','mulweli','raliphaswa','zwidala','thuso','tshivenda','vho','ndi khou'],zu:['sawubona'],st:['dumela'],xh:['molo'],ts:['avuxeni'],en:['hello']};
-const langNames={ve:'Tshivenda',zu:'IsiZulu',st:'Sesotho',xh:'IsiXhosa',ts:'Xitsonga',en:'English'};
-let currentLang='ve',teaching=false,lastBotMsg='',heyMALive=false,wakeRec=null;
-function detectLanguage(t){t=t.toLowerCase();let s={ve:0,zu:0,st:0,xh:0,ts:0,en:0};for(let l in langKeywords)langKeywords[l].forEach(w=>{if(t.includes(w))s[l]+=3});s[document.getElementById('lang').value]+=12;return Object.keys(s).reduce((a,b)=>s[a]>s[b]?a:b);}
-function speak(text){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang='en-ZA';u.rate=0.82;let vs=speechSynthesis.getVoices();let za=vs.find(v=>v.lang==='en-ZA')||vs.find(v=>v.lang.includes('ZA'))||vs[0];if(za)u.voice=za;document.getElementById('chat').classList.add('speaking');u.onend=()=>{document.getElementById('chat').classList.remove('speaking');if(heyMALive)startWakeListening();};speechSynthesis.speak(u);}
-function speakLast(){if(lastBotMsg)speak(lastBotMsg);}
-function addMsg(t,c){let d=document.createElement('div');d.className='msg '+c;d.textContent=t;let tag=document.createElement('span');tag.className='langTag';tag.textContent='['+langNames[currentLang]+']';d.appendChild(tag);document.getElementById('chat').appendChild(d);document.getElementById('chat').scrollTop=99999;if(c==='bot'){lastBotMsg=t;setTimeout(()=>speak(t),200);}}
-function changeLang(){currentLang=document.getElementById('lang').value;addMsg('Ndi khou amba '+langNames[currentLang]+' zwino','bot');}
-function teachMode(){teaching=true;addMsg("📚 FUNDA MODE! Nwalani: ipfi = thalutshedzo","bot");}
-function toggleHeyMA(){heyMALive=!heyMALive;let b=document.getElementById('wakeBtn');if(heyMALive){b.textContent='🛑 STOP HEY MA';b.classList.add('active');startWakeListening();addMsg("🎤 HEY MA ON 🔥 - Amba: Hey MA, ndi khou pfa hani? Sa Siri","bot");}else{b.textContent='🎤 HEY MA';b.classList.remove('active');if(wakeRec)try{wakeRec.stop();}catch(e){}}}
-function startWakeListening(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){addMsg('Shumisani Chrome 🎤','bot');return}let rec=new SR();wakeRec=rec;rec.lang='en-ZA';rec.continuous=true;rec.interimResults=true;rec.start();rec.onresult=e=>{let tr='';for(let i=e.resultIndex;i<e.results.length;i++)tr+=e.results[i][0].transcript;let low=tr.toLowerCase();if(low.includes('hey ma')||low.includes('hey em')){try{rec.stop();}catch(e){}let q=low.split(/hey ma|hey em/).pop().trim();if(q.length<2){addMsg("🎤 Hey MA - Ndaa Vho, ndi khou vha thetshelesa","bot");setTimeout(()=>startCommandListening(),800);}else{document.getElementById('q').value=q;ask();}}};rec.onend=()=>{if(heyMALive&&!speechSynthesis.speaking)setTimeout(()=>startWakeListening(),700);}}
-function startCommandListening(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=new SR();rec.lang='en-ZA';rec.start();rec.onresult=e=>{document.getElementById('q').value=e.results[0][0].transcript;ask();}}
-function share(){if(navigator.share)navigator.share({title:'MA',text:'MA - Mzansi Assistance by Mulweli'});else addMsg('Share: MA','bot');}
-async function ask(){let q=document.getElementById('q').value.trim();if(!q)return;addMsg(q,'user');document.getElementById('q').value='';currentLang=detectLanguage(q);document.getElementById('lang').value=currentLang;if(teaching&&q.includes('=')){let p=q.split('=');dict[currentLang][p[0].trim().toLowerCase()]=p[1].trim();teaching=false;addMsg('✅ Ndi funze!','bot');return}let qL=q.toLowerCase().replace(/hey ma/g,'').trim();if(dict[currentLang]&&dict[currentLang][qL]){addMsg(dict[currentLang][qL],'bot');return}for(let k in dict[currentLang]){if(qL.includes(k)){addMsg(dict[currentLang][k],'bot');return}}addMsg("Ndi a pfesesa '"+q+"'. Amba nga Tshivenda.",'bot');}
-document.getElementById('q').addEventListener('keypress',e=>{if(e.key==='Enter')ask();});
-window.onload=()=>{speechSynthesis.getVoices();addMsg("Ndaa Vho! Ndi nne MA. Ndi yo bveledzwa nga Mulweli Phaswana wa Raliphaswa - Kasi Boy Built From Dust, Powered By Dreams. Pfani HEY MA u amba na nne sa Siri 🔥",'bot');}
+function saveKey(){let k=document.getElementById('apiKey').value.trim();if(!k.startsWith('gsk_')){document.getElementById('apiMsg').textContent='❌ Key must start with gsk_';return;}localStorage.setItem('groq_key',k);document.getElementById('apiMsg').textContent='✅ Brain Connected! MA is now super smart!';updateStatus();document.getElementById('apiKey').value='';}
+function removeKey(){localStorage.removeItem('groq_key');document.getElementById('apiMsg').textContent='Brain removed - using local smart mode';updateStatus();}
+function toggleApiBox(){let b=document.getElementById('apiBox');b.style.display=b.style.display=='none'?'block':'none';}
+function updateStatus(){let has=!!localStorage.getItem('groq_key');document.getElementById('dot').className='statusDot '+(has?'online':'offline');document.getElementById('statusText').textContent=has?'Super Brain (Groq) Connected':'Local Smart Brain';}
+async function testBrain(){let k=localStorage.getItem('groq_key');if(!k){document.getElementById('apiMsg').textContent='Add key first';return;}document.getElementById('apiMsg').textContent='Testing...';try{let r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:'llama-3.1-8b-instant',messages:[{role:'user',content:'Say hi, I am MA'}],max_tokens:20})});let j=await r.json();if(j.choices) document.getElementById('apiMsg').textContent='✅ Test OK: '+(j.choices[0].message.content.slice(0,40));else document.getElementById('apiMsg').textContent='❌ '+(j.error?.message||'Failed');}catch(e){document.getElementById('apiMsg').textContent='❌ Error: '+e.message;}}
+function localBrain(q){q=q.toLowerCase();if(q.match(/mudini|holwiwa|emergency|ambulance|malwadze/)) return lang=='ve'?"🆘 EMERGENCY:\n• Police 10111 / 112\n• Ambulance 10177\n• Go to nearest clinic now!":"🆘 EMERGENCY:\n• Police 10111 / 112\n• Ambulance 10177\n• Go to nearest clinic!";if(q.match(/police|mapholisa|10111/)) return "🚨 Police: 10111, 112 (cell), Crime Stop 08600 10111";if(q.match(/who are you|nnyi wena|mulweli|founder/)) return lang=='ve'?"Ndi nne MA, yo bveledzwa nga Mulweli Phaswana - Kasi Boy! 🔥":"I'm MA, built by Mulweli Phaswana - Built From Dust, Powered By Dreams! 🔥";if(q.match(/hello|hi|ndaa/)) return UI[lang].intro;return null;}
+async function askWithGroq(q){let key=localStorage.getItem('groq_key');if(!key) return null;try{let sys=UI[lang].sys;let res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({model:'llama-3.1-8b-instant',messages:[{role:'system',content:sys},{role:'user',content:q}],temperature:0.7,max_tokens:500})});let data=await res.json();if(data.choices && data.choices[0]) return data.choices[0].message.content;else throw new Error(data.error?.message||'Groq error');}catch(e){return "⚠️ Brain error: "+e.message;}}
+function addMsg(t,c){let ch=document.getElementById('chat');let d=document.createElement('div');d.className='msg '+c;d.textContent=t;ch.appendChild(d);ch.scrollTop=ch.scrollHeight+200;if(c=='bot') lastBot=t;}
+function clearChat(){document.getElementById('chat').innerHTML='';addMsg(UI[lang].intro,'bot');}
+function changeLang(){lang=document.getElementById('lang').value;document.getElementById('langLabel').textContent=lang.toUpperCase();document.getElementById('q').placeholder=UI[lang].ph;addMsg("✅ Switched to "+lang.toUpperCase()+" - "+UI[lang].intro,'bot');}
+document.getElementById('lang').addEventListener('change',changeLang);
+function shareApp(){if(navigator.share) navigator.share({title:'MA - Mzansi Assistance',url:location.href});else{navigator.clipboard.writeText(location.href);addMsg("Link copied: "+location.href,'bot');}}
+function speak(text){try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text.replace(/[^\w\s\.,!?:'’áéíóúñ ]/g,''));u.lang='en-ZA';u.rate=0.95;speechSynthesis.speak(u);}catch(e){}}
+function speakLast(){if(lastBot) speak(lastBot);}
+function toggleWake(){heyOn=!heyOn;let b=document.getElementById('wakeBtn');if(heyOn){b.textContent='🛑 STOP';b.style.background='#00E676';startWake();addMsg("🎤 HEY MA listening...","bot");}else{b.textContent='🎤 HEY MA';b.style.background='';if(wakeRec) try{wakeRec.stop();}catch(e){}}}
+function startWake(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){addMsg("Use Chrome for Hey MA 🎤","bot");return;}let rec=new SR();wakeRec=rec;rec.lang='en-ZA';rec.continuous=false;try{rec.start();}catch(e){}rec.onresult=e=>{let tr=e.results[0][0].transcript;document.getElementById('q').value=tr;ask();};rec.onend=()=>{if(heyOn) setTimeout(()=>startWake(),800);}}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+document.getElementById('installBtn').addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();let c=await deferredPrompt.userChoice;deferredPrompt=null;}else{addMsg("To install: Chrome menu → Add to Home Screen 📲","bot");}});
+async function ask(){let inp=document.getElementById('q');let q=inp.value.trim();if(!q) return;addMsg(q,'user');inp.value='';let thinking=document.createElement('div');thinking.className='msg bot';thinking.textContent='MA is thinking...';thinking.id='thinking';document.getElementById('chat').appendChild(thinking);document.getElementById('chat').scrollTop=99999;let answer=null;let groqKey=localStorage.getItem('groq_key');if(groqKey){answer=await askWithGroq(q);}if(!answer){let local=localBrain(q);answer=local||(lang=='ve'?"Ndi a zwi pfesesa Vho! Ndi hone u vha thusa! Vha nga vhudzisa nga emergency, pfunzo, kana technology.":"Got you! Add Groq key in 'CONNECT AI BRAIN' to make me super smart like ChatGPT! But I can still help. What do you need?");}document.getElementById('thinking')?.remove();addMsg(answer,'bot');speak(answer);}
+document.getElementById('q').addEventListener('keypress',e=>{if(e.key=='Enter') ask();});
+window.onload=()=>{updateStatus();document.getElementById('q').placeholder=UI[lang].ph;setTimeout(()=>addMsg("Hey, I'm MA — Mzansi Assistance. How can I assist you today? 😊\n\nI'm smart now - no repeating! Tap 'CONNECT AI BRAIN' to add free ChatGPT-level brain.",'bot'),600);};
 </script>
 </body>
-  </html>
+</html>
